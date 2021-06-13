@@ -1,0 +1,146 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}GammeUsinage{% endblock %}
+
+{% block body %}
+    <h1>GammeUsinage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ gamme_usinage.id }}</td>
+            </tr>
+            <tr>
+                <th>Operation</th>
+                <td>{{ gamme_usinage.Operation }}</td>
+            </tr>
+            <tr>
+                <th>Machine</th>
+                <td>{{ gamme_usinage.Machine }}</td>
+            </tr>
+            <tr>
+                <th>Temps</th>
+                <td>{{ gamme_usinage.PuissanceMachine }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('gamme_usinage_index') }}">back to list</a>
+
+    <a href="{{ path('gamme_usinage_edit', {'id': gamme_usinage.id}) }}">edit</a>
+
+    {{ include('gamme_usinage/_delete_form.html.twig') }}
+{% endblock %}
+#}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+        <link
+            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
+            rel="stylesheet">
+    
+        <!-- Custom styles for this template-->
+        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+        <!-- Custom styles for this page -->
+        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+      <style>
+ html{
+    margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color:#4e73df;
+  padding-top: 30px;
+  padding-right: 80px;
+  padding-bottom:30px;
+  padding-left: 80px;
+}
+
+body{
+background-color:white;
+
+font-family: Verdana, sans-serif; 
+ font-size: 100%;
+ border-width: 2px 4px;
+  border-radius: 40px;
+  min-height: 100vh;
+  padding: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+      </style>
+    </head>
+
+
+
+
+<body>
+    <div>
+    <h3 style="color:#4e73df;">Gamme Usinage</h3>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Operation 's ID</th>
+                <td><li>{{ gamme_usinage.id }}</li></td>
+            </tr>
+            <tr>
+                <th> Operation</th>
+                <td><li>{{ gamme_usinage.Operation }}</li></td>
+            </tr>
+            <tr>
+                <th>  Machine</th>
+                <td><li>{{ gamme_usinage.Machine }}</li></td>
+            </tr>
+            <tr>
+                <th> Power </th>
+                <td><li>{{gamme_usinage.PuissanceMachine }}</li></td>
+            </tr>
+            
+            
+    
+
+       
+
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-icon-split" href="{{ path('gamme_usinage_index') }}" >  <span class="icon text-white-50">
+    <i class="fas fa-check"></i>
+</span>
+<span class="text">Back to list</span></a>
+
+   
+    <a class="btn btn-primary btn-icon-split" href="{{ path('gamme_usinage_edit', {'id': gamme_usinage.id}) }}">  <span class="icon text-white-50">
+<i class="fas fa-check"></i>
+</span>
+<span class="text">Edit</span></a>
+
+                               
+                                <a href="#" class="btn btn-danger btn-icon-split"  >
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span><span type="text">  {{ include('gamme_usinage/_delete_form.html.twig') }}<span>
+                                  
+                                </a>
+    
+
+</div>
+
+     <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+</body>
+

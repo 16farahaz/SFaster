@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+        <link
+            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
+            rel="stylesheet">
+    
+        <!-- Custom styles for this template-->
+        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+        <!-- Custom styles for this page -->
+        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+        <style>
+html{
+    margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color:#4e73df;
+  padding-top: 30px;
+  padding-right: 80px;
+  padding-bottom:30px;
+  padding-left: 80px;
+}
+
+body{
+background-color:white;
+
+font-family: Verdana, sans-serif; 
+ font-size: 100%;
+ border-width: 2px 4px;
+  border-radius: 40px;
+  min-height: 100vh;
+  padding: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.idreft{
+    border-style: groove;
+
+}
+
+
+            </style>
+    </head>
+<body>
+
+    
+<div class="container" >
+<h4 style ="color:black;">Create new Model</h4></br>
+
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+
+<div id="idreft" >
+   
+  
+{{ form_widget(form.ReferenceTMG) }}
+
+    {{ form_errors(form.ReferenceTMG) }}
+
+</div></br>
+<div >
+   
+    
+    {{ form_widget(form.ReferenceBU) }}
+    {{ form_errors(form.ReferenceBU) }}
+
+</div></br>
+
+
+<div  id="contoure">
+    
+ {{ form_widget(form.NombreDePiece) }}
+
+    {{ form_errors(form.NombreDePiece) }}
+
+</div> </br>
+<div  id="matierecss" > {{form_row(form.matieres)}}</div>
+<div  id="contoure">
+   
+{{ form_label(form.relation2 ,"Operation") }}
+  {{ form_widget(form.relation2) }}
+
+    {{ form_errors(form.relation2) }}
+
+</div>
+<div> {{form_row(form.accessoires)}}</div>
+
+<div > {{form_row(form.outils)}}</div>
+
+<div> {{form_row(form.energies)}}</div>
+
+  
+   
+    
+        <div >
+        <a class="btn btn-primary btn-icon-split" href="{{ path('modele_index') }}" style= " right: 30px;">  <span class="icon text-white-50">
+    <i class="fas fa-check"></i>
+</span>
+<span class="text">Back to list</span></a>
+<button class="btn btn-primary btn-icon-split" > <a class="btn btn-primary btn-icon-split" href="{{ path('modele_index') }}" style= " right: 30px;">  <span class="icon text-white-50">
+<i class="fas fa-check"></i>
+</span>
+<span class="text">{{ button_label|default('Save') }}</span></a></button>
+        </div>
+
+
+
+{{ form_end(form) }}
+</div>
+  <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+</body>
+</html>

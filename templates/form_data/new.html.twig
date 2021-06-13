@@ -1,0 +1,261 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}New FormData{% endblock %}
+
+{% block body %}
+    <h1>Create new FormData</h1>
+
+    {{ include('form_data/_form.html.twig') }}
+
+    <a href="{{ path('form_data_index') }}">back to list</a>
+{% endblock %}
+#}
+
+      
+
+<!DOCTYPE html>
+<html>
+    
+  <head>
+  <title>Student Complaint Form</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <style>
+    html, body {
+    min-height: 100%;
+    padding-top:100px;
+    background-color:#4e73df;
+    padding-left:30px;
+    padding-right:30px;
+    }
+    body, div, form, input, select, p { 
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 22px;
+    }
+    h1 {
+    margin: 15px 0;
+    font-weight: 400;
+    }
+    .testbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    padding: 3px;
+    }
+    form {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px #ccc; 
+    }
+    input, select, textarea {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    }
+    input {
+    width: calc(100% - 10px);
+    padding: 5px;
+    }
+    select {
+    width: 100%;
+    padding: 7px 0;
+    background: transparent;
+    }
+    textarea {
+    width: calc(100% - 6px);
+    }
+    .item {
+    position: relative;
+    margin: 10px 0;
+    }
+    .item:hover p, .item:hover i {
+    color: #095484;
+    }
+    input:hover, select:hover, textarea:hover, .preferred-metod label:hover input {
+    box-shadow: 0 0 5px 0 #095484;
+    }
+    .preferred-metod label {
+    display: block;
+    margin: 5px 0;
+    }
+    .preferred-metod:hover input {
+    box-shadow: none;
+    }
+    .preferred-metod-item input, .preferred-metod-item span {
+    width: auto;
+    vertical-align: middle;
+    }
+    .preferred-metod-item input {
+    margin: 0 5px 0 0;
+    }
+    input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    }
+    .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    font-size: 20px;
+    color: #a9a9a9;
+    }
+    .item i {
+    right: 1%;
+    top: 30px;
+    z-index: 1;
+    }
+    [type="date"]::-webkit-calendar-picker-indicator {
+    right: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    }
+    .btn-block {
+    margin-top: 20px;
+    text-align: center;
+    }
+    button {
+    width: 150px;
+    padding: 10px;
+    border: none;      
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+    background-color: #095484;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    }
+    button:hover {
+    background-color: #0666a3;
+    }
+    @media (min-width: 568px) {
+    .name-item, .city-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    .name-item input, .city-item input {
+    width: calc(50% - 20px);
+    }
+    .city-item select {
+    width: calc(50% - 8px);
+    }
+    }
+  </style>
+</head>
+<body>
+   
+  <!-- Status message -->
+
+
+<!-- File upload form -->
+<div class="testbox">
+<form id="fupForm" enctype="multipart/form-data" >
+<div class="statusMsg"></div>
+<h2> Add file</h2>
+<div class="item">
+<div class="name-item">
+  
+    <input type="text" class="form-control" id="referencetmg" name="referencetmg" placeholder="T.M.G Reference" required />
+    <input type="text" class="form-control" id="description" name="description" placeholder="Description" required />
+
+</div>
+</div>
+
+<div class="item">
+<div class="name-item">
+
+<input type="file" class="form-control" id="file" name="files[]" multiple />
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="btn-block">
+<button  type="submit" name="submit" class="btn btn-success submitBtn" value="SUBMIT">{{ button_label|default('Save') }}</button>
+</div>
+<h3><a href="{{ path('form_data_index') }}"style="float:left;">back to list</a></h3>
+<h3><a href="{{ path('demande_o_new') }}" style="float:right;">Next</a><h5>
+</form>
+
+</div>
+       
+
+</body>
+
+</html>
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+<script>
+      
+
+    $(document).ready(function(e){
+// Submit form data via Ajax
+$("#fupForm").on('submit', function(e){
+e.preventDefault();
+$.ajax({
+    type: 'POST',
+    url: "{{ asset('ajax/submit.php') }}",
+    data: new FormData(this),
+    dataType: 'json',
+    contentType: false,
+    cache: false,
+    processData:false,
+    beforeSend: function(){
+        $('.submitBtn').attr("disabled","disabled");
+        $('#fupForm').css("opacity",".5");
+    },
+    success: function(response){ //console.log(response);
+        $('.statusMsg').html('');
+        if(response.status == 1){
+            $('#fupForm')[0].reset();
+            $('.statusMsg').html('<p class="alert alert-success">'+response.message+'</p>');
+        }else{
+            $('.statusMsg').html('<p class="alert alert-danger">'+response.message+'</p>');
+        }
+        $('#fupForm').css("opacity","");
+        $(".submitBtn").removeAttr("disabled");
+        
+    }
+});
+});
+
+
+    
+   // File type validation
+$("#file").change(function() {
+var file = this.files[0];
+var fileType = file.type;
+var match = ['application/pdf', 'application/msword', 'application/vnd.ms-office', 'image/jpeg', 'image/png', 'image/jpg'];
+if(!((fileType == match[0]) || (fileType == match[1]) || (fileType == match[2]) || (fileType == match[3]) || (fileType == match[4]) || (fileType == match[5]))){
+alert('Sorry, only PDF, DOC, JPG, JPEG, & PNG files are allowed to upload.');
+$("#file").val('');
+return false;
+}
+});
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+</script>

@@ -1,0 +1,270 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}DemandeO{% endblock %}
+
+{% block body %}
+    <h1>DemandeO</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande_o.id }}</td>
+            </tr>
+            <tr>
+                <th>Responsable</th>
+                <td>{{ demande_o.Responsable }}</td>
+            </tr>
+            <tr>
+                <th>Service</th>
+                <td>{{ demande_o.Service }}</td>
+            </tr>
+            <tr>
+                <th>ResponsableMag</th>
+                <td>{{ demande_o.ResponsableMag }}</td>
+            </tr>
+            <tr>
+                <th>RefTMG</th>
+                <td>{{ demande_o.RefTMG }}</td>
+            </tr>
+            <tr>
+                <th>RefBU</th>
+                <td>{{ demande_o.RefBU }}</td>
+            </tr>
+            <tr>
+                <th>Modele</th>
+                <td>{{ demande_o.Modele }}</td>
+            </tr>
+            <tr>
+                <th>BU</th>
+                <td>{{ demande_o.BU }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ demande_o.Description }}</td>
+            </tr>
+            <tr>
+                <th>Doc</th>
+                <td>{{ demande_o.Doc }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ demande_o.Type }}</td>
+            </tr>
+            <tr>
+                <th>ResponsableADMI</th>
+                <td>{{ demande_o.ResponsableADMI }}</td>
+            </tr>
+            <tr>
+                <th>Confirmation</th>
+                <td>{{ demande_o.Confirmation }}</td>
+            </tr>
+            <tr>
+                <th>Estimationprix</th>
+                <td>{{ demande_o.Facture }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ demande_o.Statut }}</td>
+            </tr>
+            <tr>
+                <th>Priorite</th>
+                <td>{{ demande_o.Priorite }}</td>
+            </tr>
+            <tr>
+                <th>ResponsableTechnique</th>
+                <td>{{ demande_o.ResponsableTechnique }}</td>
+            </tr>
+            <tr>
+                <th>ConfirmationDemande</th>
+                <td>{{ demande_o.confirmationDemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('demande_o_index') }}">back to list</a>
+
+    <a href="{{ path('demande_o_edit', {'id': demande_o.id}) }}">edit</a>
+
+    {{ include('demande_o/_delete_form.html.twig') }}
+{% endblock %}
+#}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+        <link
+            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
+            rel="stylesheet">
+    
+        <!-- Custom styles for this template-->
+        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+        <!-- Custom styles for this page -->
+        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+      <style>
+ html{
+    margin-top: 0px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color:#4e73df;
+  padding-top: 30px;
+  padding-right: 80px;
+  padding-bottom:30px;
+  padding-left: 80px;
+}
+
+body{
+background-color:white;
+
+font-family: Verdana, sans-serif; 
+ font-size: 100%;
+ border-width: 2px 4px;
+  border-radius: 40px;
+  min-height: 100vh;
+  padding: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+      </style>
+
+        <script src="/pdf.js"></script>
+  <script src="/simple.js"></script>
+    </head>
+
+
+
+
+<body>
+    <div>
+    <h3 style="color:#4e73df;">Request</h3>
+
+<h1></h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Request ID</th>
+                <td>{{ demande_o.id }}</td>
+            </tr>
+            <tr>
+                <th>Sender</th>
+                <td>{{ demande_o.Responsable }}</td>
+            </tr>
+            <tr>
+                <th>Service</th>
+                <td>{{ demande_o.Service }}</td>
+            </tr>
+            <tr>
+                <th>Store Manger</th>
+                <td>{{ demande_o.ResponsableMag }}</td>
+            </tr> <tr>
+                <th>store reference</th>
+                <td>{{ demande_o.ReferenceMag }}</td>
+            </tr>
+            <tr>
+                <th>T.M.G reference</th>
+                <td>{{ demande_o.RefTMG }}</td>
+            </tr>
+            <tr>
+                <th>B.U Reference</th>
+                <td>{{ demande_o.RefBU }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ demande_o.Modele }}</td>
+            </tr>
+            <tr>
+                <th>B.U</th>
+                <td>{{ demande_o.BU }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ demande_o.Description }}</td>
+            </tr>
+            <tr>
+                <th>Documentation</th>
+                <td>{{ demande_o.Doc }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ demande_o.Type }}</td>
+            </tr>
+            <tr>
+                <th>administration manger</th>
+                <td>{{ demande_o.ResponsableADMI }}</td>
+            </tr>
+            <tr>
+                <th>Confirmation</th>
+                <td>{{ demande_o.Confirmation }}</td>
+            </tr>
+            <tr>
+                <th>Invoice ID </th>
+                <td>{{  demande_o.Facture.idfacture}}</td>
+            </tr>
+            <tr>
+                <th>Request's state</th>
+                <td>{{ demande_o.Statut }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ demande_o.Priorite }}</td>
+            </tr>
+            <tr>
+                <th>Director</th>
+                <td>{{ demande_o.ResponsableTechnique }}</td>
+            </tr>
+            <tr>
+                <th>Agree</th>
+                <td>{{ demande_o.confirmationDemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-icon-split" href="{{ path('demande_o_index') }}" >  <span class="icon text-white-50">
+    <i class="fas fa-check"></i>
+</span>
+<span class="text">Back to list</span></a>
+
+   
+    <a class="btn btn-primary btn-icon-split" href="{{ path('demande_o_edit', {'id': demande_o.id}) }}">  <span class="icon text-white-50">
+<i class="fas fa-check"></i>
+</span>
+<span class="text">Edit</span></a>
+
+                               
+                                <a href="#" class="btn btn-danger btn-icon-split"  >
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span><span type="text">{{ include('demande_o/_delete_form.html.twig') }}<span>
+                                  
+                                </a>
+     
+                               
+
+ 
+
+
+</div>
+
+
+     <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+    
+</body>
+</html>
+<script></script>
+

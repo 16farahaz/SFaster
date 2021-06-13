@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormData{% endblock %}
+
+{% block body %}
+    <h1>FormData</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ form_datum.id }}</td>
+            </tr>
+            <tr>
+                <th>FileNames</th>
+                <td>{{ form_datum.FileNames }}</td>
+            </tr>
+            <tr>
+                <th>SubmittedOn</th>
+                <td>{{ form_datum.SubmittedOn ? form_datum.SubmittedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ReferenceTmg</th>
+                <td>{{ form_datum.ReferenceTmg }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ form_datum.Description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('form_data_index') }}">back to list</a>
+
+    <a href="{{ path('form_data_edit', {'id': form_datum.id}) }}">edit</a>
+
+    {{ include('form_data/_delete_form.html.twig') }}
+{% endblock %}

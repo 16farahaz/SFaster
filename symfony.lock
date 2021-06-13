@@ -97,6 +97,12 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
+    "lcobucci/jwt": {
+        "version": "4.0.3"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
@@ -288,6 +294,21 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mercure": {
+        "version": "v0.5.3"
+    },
+    "symfony/mercure-bundle": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "0.3",
+            "ref": "d1cdff3ae53bf6a5cbfb088c82f26032bdc14cc3"
+        },
+        "files": [
+            "./config/packages/mercure.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v5.2.6"
     },
@@ -363,6 +384,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.22.1"
     },
+    "symfony/polyfill-php81": {
+        "version": "v1.23.0"
+    },
     "symfony/process": {
         "version": "v5.2.4"
     },
@@ -415,6 +439,15 @@
     },
     "symfony/security-http": {
         "version": "v5.2.6"
+    },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
     },
     "symfony/serializer": {
         "version": "v5.2.4"
@@ -508,6 +541,21 @@
     },
     "symfony/yaml": {
         "version": "v5.2.5"
+    },
+    "symfonycasts/reset-password-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
+        },
+        "files": [
+            "./config/packages/reset_password.yaml"
+        ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.4.0"
     },
     "twig/extra-bundle": {
         "version": "v3.3.0"

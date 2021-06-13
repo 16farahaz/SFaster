@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QualiteM index{% endblock %}
+
+{% block body %}
+    <h1>QualiteM index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ReferenceTMG</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qualite_m in qualite_ms %}
+            <tr>
+                <td>{{ qualite_m.id }}</td>
+                <td>{{ qualite_m.ReferenceTMG }}</td>
+                <td>{{ qualite_m.Description }}</td>
+                <td>{{ qualite_m.image }}</td>
+                <td>
+                    <a href="{{ path('qualite_m_show', {'id': qualite_m.id}) }}">show</a>
+                    <a href="{{ path('qualite_m_edit', {'id': qualite_m.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('qualite_m_new') }}">Create new</a>
+{% endblock %}

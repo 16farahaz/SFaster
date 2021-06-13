@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body>
+</br>
+<label> SIMO TUNISIE </label></br>
+<label> Manzel Jmil Zone II</label></br>
+<label> Facture de fabrication d'outillage  </label></br>
+<label>  Responsable service technique:Labidh Atef</label></br>
+<label id= "labidfacture"> </label></br>
+<label>les operation :</label>
+    <body>
+        <div class="container">
+          <h2>View data</h2>
+            <table class="table table-bordered table-sm" >
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>identifiant de facture</th>
+                <th>identifiant de facture</th>
+                <th>Identifiant de modéle </th>
+              </tr>
+            </thead>
+            <tbody id="table">
+            </tbody>
+          </table>
+        </div>
+
+
+
+</body>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+    $.ajax({
+                url: "show_facture.php",
+                type: "POST",
+                data:{
+                    action :'listefacture',
+                    $medele
+                },
+                success: function(data){
+                    $('#table').html(data); 
+                }
+            });
+            });
+</script>
+{% endblock %}

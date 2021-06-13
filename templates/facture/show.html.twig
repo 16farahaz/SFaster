@@ -1,0 +1,515 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %}
+    <h1>Facture</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ facture.id }}</td>
+            </tr>
+            <tr>
+                <th>Modele_id</th>
+                <td>{{ facture.modeleId }}</td>
+            </tr>
+            <tr>
+                <th>Outil_id</th>
+                <td>{{ facture.outilId }}</td>
+            </tr>
+            <tr>
+                <th>Idfacture</th>
+                <td>{{ facture.idfacture }}</td>
+            </tr>
+            <tr>
+                <th>Prix_outil</th>
+                <td>{{ facture.prixOutil }}</td>
+            </tr>
+            <tr>
+                <th>Temps</th>
+                <td>{{ facture.temps }}</td>
+            </tr>
+            <tr>
+                <th>Prixtotale</th>
+                <td>{{ facture.prixtotale }}</td>
+            </tr>
+            <tr>
+                <th>Gamme_usinage_id</th>
+                <td>{{ facture.gammeUsinageId }}</td>
+            </tr>
+            <tr>
+                <th>Energie_id</th>
+                <td>{{ facture.energieId }}</td>
+            </tr>
+            <tr>
+                <th>Matieres_id</th>
+                <td>{{ facture.matieresId }}</td>
+            </tr>
+            <tr>
+                <th>Prix_energie</th>
+                <td>{{ facture.prixEnergie }}</td>
+            </tr>
+            <tr>
+                <th>Puissance_machine</th>
+                <td>{{ facture.puissanceMachine }}</td>
+            </tr>
+            <tr>
+                <th>Prix_totale_energie</th>
+                <td>{{ facture.prixTotaleEnergie }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ facture.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Prix_matiere</th>
+                <td>{{ facture.prixMatiere }}</td>
+            </tr>
+            <tr>
+                <th>Prix_totale_matiere</th>
+                <td>{{ facture.prixTotaleMatiere }}</td>
+            </tr>
+            <tr>
+                <th>Nombre_employer</th>
+                <td>{{ facture.nombreEmployer }}</td>
+            </tr>
+            <tr>
+                <th>Salaire_employer</th>
+                <td>{{ facture.salaireEmployer }}</td>
+            </tr>
+            <tr>
+                <th>Nombre_piece</th>
+                <td>{{ facture.nombrePiece }}</td>
+            </tr>
+            <tr>
+                <th>Accessoire_id</th>
+                <td>{{ facture.accessoireId }}</td>
+            </tr>
+            <tr>
+                <th>Prix_accessoire</th>
+                <td>{{ facture.prixAccessoire }}</td>
+            </tr>
+            <tr>
+                <th>Quantite_accessoire</th>
+                <td>{{ facture.quantiteAccessoire }}</td>
+            </tr>
+            <tr>
+                <th>Prix_totale_accessoire</th>
+                <td>{{ facture.prixTotaleAccessoire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('facture_index') }}">back to list</a>
+
+    <a href="{{ path('facture_edit', {'id': facture.id}) }}">edit</a>
+
+    {{ include('facture/_delete_form.html.twig') }}
+{% endblock %}#}
+<!DOCTYPE html>
+<html>
+<head>
+      <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css') }}">
+
+
+
+<style type="text/css">
+body {
+    margin: 0;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5385;
+    color: #333;
+    text-align: left;
+    background-color: #eee
+}
+
+.mt-50 {
+    margin-top: 50px
+}
+
+.mb-50 {
+    margin-bottom: 50px
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .1875rem
+}
+
+.card-img-actions {
+    position: relative
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    text-align: center
+}
+
+.card-title {
+    margin-top: 10px;
+    font-size: 17px
+}
+
+.invoice-color {
+    color: red !important
+}
+
+.card-header {
+    padding: .9375rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .02);
+    border-bottom: 1px solid rgba(0, 0, 0, .125)
+}
+
+a {
+    text-decoration: none !important
+}
+
+.btn-light {
+    color: #333;
+    background-color: #fafafa;
+    border-color: #ddd
+}
+
+.header-elements-inline {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap
+}
+
+@media (min-width: 768px) {
+    .wmin-md-400 {
+        min-width: 400px !important
+    }
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2196f3
+}
+
+.btn-labeled>b {
+    position: absolute;
+    top: -1px;
+    background-color: blue;
+    display: block;
+    line-height: 1;
+    padding: .62503rem
+}
+.div {
+   
+    text-align: center;
+    position:relative ;
+    right:300px;
+    bottom:50px;
+    
+    box-shadow :rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    
+   
+
+
+}
+
+
+@media print {
+  #printPageButton {
+    display: none;
+  }
+  #def {
+    display: none;
+  }
+  #cancel {
+    display: none;
+  }
+}
+
+</style>
+
+</head>
+{% block body %}
+
+<body>
+    
+    <div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-transparent header-elements-inline">
+                    <h6 class="card-title"> Invoice</h6>
+                    <div class="header-elements">  <button  id="printPageButton" type="button" onclick="window.print();" class="btn btn-light btn-sm ml-3"><i class="fa fa-print mr-2"></i> Print</button> </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-4 pull-left">
+                                
+                                <ul class="list list-unstyled mb-0 text-left">
+                            
+                                    <li><h6>SIMO TUNISIE</h6></li>
+                                    <li>Manzel Jmil Zone II</li>
+                                    <li>Facture de fabrication d'outillage</li>
+                                    <li>Responsable service technique : Labidh Atef</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-4 ">
+                                <div class="text-sm-right">
+                                 <h4 class="invoice-color mb-2 mt-md-2">Invoice #</h4><h4  id = "numfac"class="invoice-color mb-2 mt-md-2">{{ facture.idfacture }}</h4>
+                                 <h4 id = "idfac" class="invoice-color mb-2 mt-md-2">{{ facture.modeleId }}</h4>
+                               
+                               
+                                    <ul class="list list-unstyled mb-0">
+                                        <li id="datee">Date: <span  class="font-weight-semibold"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-lg">
+                        <thead>
+                            <tr>
+                                <th>Tools's price</th>
+                                <th>energie 's price for this operation</th>
+                                <th>Material's price for the construction</th>
+                                <th>Accessoires's price for the operation</th>
+                                <th>Employers's salary for all operations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table">
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="d-md-flex flex-md-wrap">
+                        <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                            <h6 class="mb-3 text-left">Total due</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <th class="text-left">Total:</th>
+                                            <td class="text-right text-primary">
+                                        <h5  id ="tot" class="font-weight-semibold"></h5>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="text-right mt-3"> <button id="def" type="button"  class="btn btn-primary"><b></b> Delete</button> </div>
+                            <div class="text-right mt-3"> <button  id ="cancel"type="button" class="btn btn-primary"><b></b> Return</button> </div>
+
+
+
+
+                             <div class="div"  id="div" style="display:none;">
+                               
+                                <h6>Are you sure that you want to delete this invoice </h6> </br> 
+                           
+                                 <label> <div  id="groupe_buttons" class="text-right mt-3"> <button  id="deletebtn" type="button"  class="btn btn-primary"><b></b>  yes I'm sure</button> <button  id="cancel" type="button" class="btn btn-primary"><b></b> No I'm not</button></div></label>
+                            
+                            
+                            </div>
+                        
+
+                        </div>
+                           
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style ="text-align: center;"> <span class="text-muted"> SIMO TUNISIE - 2020-2021</span> </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {#
+</br>
+</br>
+</br>
+
+<form   id ="form_cont">
+<div id ="printpaper">
+</br>
+<label> SIMO TUNISIE </label></br>
+<label> Manzel Jmil Zone II</label></br>
+<label> Facture de fabrication d'outillage  </label></br>
+<label>  Responsable service technique:Labidh Atef</label></br>
+<label>  Date :</label>
+<label id="datee"></label></br>
+<label>Invoice'ID :</label>
+<label id = "idfac">{{ facture.modeleId }}</label></br>
+<label>Ordre d'action :</label>
+<label id = "numfac">{{ facture.idfacture }}</label>
+
+
+        <div class="container">
+          <h2>Invoice</h2>
+            <table class="table table-bordered table-sm" >
+            <thead>
+              <tr>
+                <th>Tools's price</th>
+                <th>energie 's price for this operation </th>
+                <th>Material's price for the construction</th>
+                <th>Accessoires's price for the operation</th>
+                <th>Employers's salary for all operations </th>
+                
+              </tr>
+            </thead>
+            <tbody id="table">
+            </tbody>
+          </table>
+        </div>
+
+    <label>Total due:</label>
+    <label id ="tot"></label></br>
+
+</div>
+</form>
+
+<form id ="printform">
+<div class="text-center">
+<button onclick="window.print();" class="btn btn-primary" id="print-btn"   style: display: none , visibility:hidden >Print</button>
+</div>
+<a href="{{ path('facture_index') }}">back to list</a>
+<button class="btn" id="delf">Delete</button>  {# make the deleteforme visible#}
+{#</form>
+
+<form id ="deleteform" style= "center";>
+
+<label>Are you sure that you want to delete this invoice </label> </br> 
+<input type='button' class="btndelete" id="deletebtn" style="color:red;" value = "OK">  {# delete from data#}
+{#<input type='button' class="btn" id="cancel" style="color:bleu;" value = "cancel"> </form> #} {# make the deleteforme invisible#}
+
+
+</body>
+{% endblock %}
+
+</html>
+
+
+{% block javascripts %}
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+     
+    $.ajax({
+                url: "{{ asset('ajax/show_facture.php') }}",
+                type: "POST",
+                data:{
+                  $modeles_id:$('#idfac').html(),
+                  $idfactures:$('#numfac').html(),
+                    action :'listefacture',
+                },
+                success: function(data){
+                    $('#table').html(data); 
+                }
+            });
+
+            $.ajax({
+                url: "{{ asset('ajax/show_facture.php') }}",
+                type: "POST",
+                data:{
+                  $modeles_id:$('#idfac').html(),
+                  $idfactures:$('#numfac').html(),
+                    action :'sommefacture',
+                },
+                success: function(data){
+                    $('#tot').html(data); 
+                }
+            });
+            
+            
+            $.ajax({
+                url: "{{ asset('ajax/show_facture.php') }}",
+                type: "POST",
+                data:{
+                 
+                    action :'affichagedate',
+                },
+                success: function(data){
+                    $('#datee').html(data); 
+                    console.log(data);
+                }
+            });
+
+
+
+
+            $("#deletebtn").on("click", function (event) {
+                event.preventDefault();
+                console.log($('#numfac').html());
+                $.ajax({
+                    url: "{{ asset('ajax/show_facture.php') }}",
+                    type: 'POST',
+                    data: {
+                        $idfactures:$('#numfac').html(),
+                        action: 'deletefacture' , 
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        window.location.href = {{ path('facture_index') }};
+                    }
+                   
+                });
+                });
+                $("#cancel").on("click", function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ asset('ajax/show_facture.php') }}",
+                    type: 'POST',
+                    data: {
+                      
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        window.location.href = {{ path('facture_index') }};
+
+                    }
+                   
+                });
+                });
+
+
+                $("#def").on("click",function(){
+                    $("#div").css({display: 'block'});
+});
+              
+                
+
+});
+   
+
+
+</script>
+{% endblock %}

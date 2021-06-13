@@ -1,0 +1,172 @@
+{#{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Service</th>
+                <td>{{ user.Service }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.Prenom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
+#}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+        <link
+            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
+            rel="stylesheet">
+    
+        <!-- Custom styles for this template-->
+        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    
+        <!-- Custom styles for this page -->
+        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+      <style>
+ html{
+    margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+  background-color:#4e73df;
+  padding-top: 30px;
+  padding-right: 80px;
+  padding-bottom:30px;
+  padding-left: 80px;
+}
+
+body{
+background-color:white;
+
+font-family: Verdana, sans-serif; 
+ font-size: 100%;
+ border-width: 2px 4px;
+  border-radius: 40px;
+  min-height: 100vh;
+  padding: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+      </style>
+    </head>
+
+
+
+
+<body>
+    <div>
+    <h3 style="color:#4e73df;">{{ user.Nom }} {{ user.Prenom }} </h3>
+
+    <table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>***</td>
+        </tr>
+        <tr>
+            <th>IsVerified</th>
+            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th>Service</th>
+            <td>{{ user.Service }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ user.Nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ user.Prenom }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-icon-split" href="{{ path('user_index') }}" >  <span class="icon text-white-50">
+    <i class="fas fa-check"></i>
+</span>
+<span class="text">Back to list</span></a>
+
+   
+    <a class="btn btn-primary btn-icon-split" href="{{ path('user_edit', {'id': user.id}) }}">  <span class="icon text-white-50">
+<i class="fas fa-check"></i>
+</span>
+<span class="text">Edit</span></a>
+
+                               
+                                <a href="#" class="btn btn-danger btn-icon-split"  >
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-trash"></i>
+                                    </span><span type="text">  {{ include('user/_delete_form.html.twig') }}<span>
+                                  
+                                </a>
+    
+
+</div>
+
+     <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+</body>
