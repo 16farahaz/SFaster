@@ -1,239 +1,13 @@
- {#{{ form_start(form) }}
-    {{ form_widget(form) }}
 
-    <button type="submit" class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}#}
-{#
-<!DOCTYPE html>
-<html>
-    <head>
-        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-        <link
-            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
-            rel="stylesheet">
-    
-        <!-- Custom styles for this template-->
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-    
-        <!-- Custom styles for this page -->
-        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-        <style>
-html{
-    margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 100px;
-  margin-left: 100px;
-  background-color:#4e73df;
-  padding-top: 0px;
-  padding-right: 20px;
-  padding-bottom:0px;
-  padding-left: 20px;
-}
-
-body{
-background-color:white;
-
-font-family: Verdana, sans-serif; 
- font-size: 80%;
- border-width: 2px 4px;
-  border-radius: 40px;
-  min-height: 100vh;
-  padding: 50;
-  padding-top: 0px;
-  padding-right:100px;
-  padding-bottom:0px;
-  padding-left:100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .fieldset1
-{
-    border:2px solid green;
-    -moz-border-radius:8px;
-    -webkit-border-radius:8px;	
-    border-radius:8px;	
-}
-    
-}
-.fieldset
-{
-    border:2px solid green;
-    -moz-border-radius:8px;
-    -webkit-border-radius:8px;	
-    border-radius:8px;	
-    border:2px solid #4e73df;  -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; position:relative; left:10px; top: -50px;
-    position:relative; left:820px; top:-20px;
-}
-input{
-    -webkit-border-radius:8px; 
-    border:2px solid #4e73df;
-    height:100%;
-}
-
-
-            </style>
-    </head>
-<body>
-    {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-
-    
-<div  class="container" >
-<h5 style ="color:#4e73df;  display: flex;align-items: center; justify-content: center;"> Start New Project With Your team !!</h5>
-
-{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-
-
-<div id="idreft"   style="float:right;">
-{{ form_widget(form.Responsable) }}
-{{ form_errors(form.Responsable) }}
-
-</div>
-</br> 
-<div  >
-{{ form_widget(form.Service) }}
-{{ form_errors(form.Service) }}
-
-</div>
-</br> 
-<div  id="contoure" style="float:right;">
-{{ form_widget(form.Modele) }}
-{{ form_errors(form.Modele) }}
-
-</div>
-</br> 
-<div >
-{{ form_widget(form.RefTMG) }}
-{{ form_errors(form.RefTMG) }}
-
-</div>
-</br> 
-<div style="float:right;">
-{{ form_widget(form.BU) }}
-{{ form_errors(form.BU) }}
-
-</div>
-</br> 
-<div  >
-{{ form_widget(form.RefBU) }}
-{{ form_errors(form.RefBU) }}
-
-</div>
-</br> 
-
-<div  id="contoure" style="float:right;">
-{{ form_widget(form.Description) }}
-{{ form_errors(form.Description) }}
-
-</div></br> 
-<div id="contoure" >
-{{ form_widget(form.Doc) }}
-{{ form_errors(form.Doc) }}
-
-</div>
-</br> 
-<div  id="contoure"  style="float:right;">
-
-{{ form_widget(form.Type) }}
-{{ form_errors(form.Type) }}
-
-</div>
-
-<div  id="contoure">
-    
-
-{{ form_widget(form.ResponsableMag) }}
-{{ form_errors(form.ResponsableMag) }}
-
-</div>
-</br> 
-<div  id="contoure" style="float:right;">
-   
-
-{{ form_widget(form.ResponsableADMI) }}
-{{ form_errors(form.ResponsableADMI) }}
-
-</div>
-</br> 
-<div  id="contoure">
-   
-
-{{ form_widget(form.Confirmation) }}
-{{ form_errors(form.Confirmation) }}
-
-</div>
-</br> 
-
-<div  id="contoure">
-   
-
-{{ form_widget(form.Statut) }}
-{{ form_errors(form.Statut) }}
-
-</div>
-</br> 
-<div  id="contoure" style="float:right;">
-   
-
-{{ form_widget(form.Priorite) }}
-{{ form_errors(form.Priorite) }}
-
-</div><div  id="contoure">
-   
-
-{{ form_widget(form.ResponsableTechnique) }}
-{{ form_errors(form.ResponsableTechnique) }}
-
-</div>
-</br> 
-<div  id="contoure" style="float:right; left:820px"x>
-   
-
-{{ form_widget(form.confirmationDemande) }}
-{{ form_errors(form.confirmationDemande) }}
-
-</div>
-
-<div  id="example"  style="position:center;">
-   
-
-{{ form_widget(form.ReferenceMag) }}
-{{ form_errors(form.ReferenceMag) }}
-
-</div>
-{{form_row(form.formData,{label_attr: {class: 'checkbox-custom'} })}}
-{{form_row(form.Facture)}}
-
-</div>
-</br>
-<div >
-<a class="btn btn-primary btn-icon-split" href="{{ path('demande_o_index') }}" >  <span class="icon text-white-50">
-<i class="fas fa-check"></i>
-</span> <span class="text">Back to list</span></a> 
-<button style="float:right;" class="btn btn-primary btn-icon-split" style="float:right;"> <a class="btn btn-primary btn-icon-split" href="{{ path('demande_o_index') }}"   style= " right: 30px;" > <span class="icon text-white-50">
-<i class="fas fa-check"></i>
-</span>
-<span class="text">{{ button_label|default('Save') }}</span> </a></button>
-</div>
-
-  <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-{{ form_end(form) }}
-</body>
-</html>#}
 <!DOCTYPE html>
 <html>
   <head>
     <title>Student Complaint Form</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   
     <style>
       html, body {
       min-height: 100%;
@@ -379,6 +153,23 @@ input{
         </div> 
 
 
+               <div class="item">
+      <p>Date of Request</p> 
+      <div  type="date" class="name-item" >
+      {{ form_widget(form.date) }}
+      {{ form_errors(form.date) }}
+
+      {{ form_widget(form.datefin) }}
+      {{ form_errors(form.datefin) }}
+
+    
+    </div>
+   
+  
+  
+                  </div>
+
+ 
 
 
 
@@ -454,11 +245,6 @@ input{
                   <div class="name-item">
                   {{ form_widget(form.ResponsableTechnique) }}
                   {{ form_errors(form.ResponsableTechnique) }} 
-
-                  {{ form_widget(form.Statut) }}
-                  {{ form_errors(form.Statut) }}
-
-
                  
                   </div>
 
@@ -472,8 +258,6 @@ input{
 
                 <div class="item">
                 <div class="name-item">
-                {{ form_widget(form.Priorite) }}
-                {{ form_errors(form.Priorite) }}
 
                 {{ form_widget(form.confirmationDemande) }}
                 {{ form_errors(form.confirmationDemande) }}
@@ -485,7 +269,7 @@ input{
 
 
             <div class="btn-block">
-        <button type="submit" href="{{path('demande_o_index')}}">{{ button_label|default('SEND') }}</button>
+        <button type="submit">{{ button_label|default('SEND') }}</button>
         
       </div>
       <div >
@@ -506,6 +290,45 @@ input{
      
       {{ form_end(form) }}
     </div>
+
+
+  <audio id="mySound" src="{{asset('sound/error.mp3')}}"></audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/discover').then(result=>{
+            const hubUrl = result.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+            let url = new URL(hubUrl);
+            url.searchParams.append('topic','notif');
+
+            const eventSource= new EventSource(url);
+            
+            eventSource.onmessage= (event) => {
+                var message =JSON.parse(event.data).message;
+                
+    var myAudio = document.getElementById("mySound");
+    myAudio.play();
+
+                $.toast({ 
+                    text : message, 
+                    showHideTransition : 'fade', 
+                    allowToastClose : true,      
+                    hideAfter : 8000,            
+                    stack : 5,                    
+                    textAlign : 'left',            
+                    position : 'bottom-left',    
+                    icon: 'info',
+                    loader: true,      
+                    loaderBg: '#A4DCF1'  
+                });
+            
+            }
+        })
+    });
+</script>
+
     
   </body>
 </html>

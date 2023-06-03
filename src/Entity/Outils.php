@@ -6,8 +6,11 @@ use App\Repository\OutilsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity("Outil")
  * @ORM\Entity(repositoryClass=OutilsRepository::class)
  */
 class Outils
@@ -20,21 +23,32 @@ class Outils
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("String")
      * @ORM\Column(type="string", length=255)
      */
     private $Outil;
 
     /**
+     * @Assert\GreaterThan(0)
+     * @Assert\Positive
+     * @Assert\Type("integer")
+     * @Assert\NotBlank
      * @ORM\Column(type="integer")
      */
     private $DureeDeVie;
 
     /**
+     * @Assert\GreaterThan(0)
+     * @Assert\Positive
+     * @Assert\Type("float")
+     * @Assert\NotBlank
      * @ORM\Column(type="float")
      */
     private $PrixO;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $caracteristique;

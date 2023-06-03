@@ -15,6 +15,11 @@ include "dbcon.php";
         case 'recherchefac': recherchefac($conn);break;
         case 'rechercheuser': rechercheuser($conn);break;
         case 'recherchefile': recherchefile($conn);break;
+        case 'rechercheplan': rechercheplan($conn);break;
+        case 'recherchequa' : recherchequa($conn);break;
+        case 'rechercherap' : rechercherap($conn);break;
+        case 'recherchehis' : recherchehis($conn);break;
+ 
 
        }
     }
@@ -160,7 +165,7 @@ include "dbcon.php";
         if ($result = mysqli_query($conn , $sql)){
             if(mysqli_num_rows($result) > 0){
                 while($row = $result->fetch_assoc()) {
-                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["responsable"]."</td> <td>".$row["reference_mag"]."</td> <td>".$row["ref_tmg"]."</td> <td>".$row["ref_bu"]."</td> <td>".$row["modele"]."</td><td>".$row["bu"]."</td> <td>".$row["type"]."</td> <td>".$row["statut"]."</td> <td>".$row["facture_id"]."</td> 
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["responsable"]."</td> <td>".$row["reference_mag"]."</td> <td>".$row["ref_tmg"]."</td> <td>".$row["ref_bu"]."</td> <td>".$row["modele"]."</td><td>".$row["bu"]."</td> <td>".$row["type"]."</td><td>".$row["facture_id"]."</td> 
                             <td>
                             <a href=\"./".$row["id"]."\">show</a>
                             <a href=\"./".$row["id"]."/edit\">edit</a>
@@ -214,7 +219,7 @@ include "dbcon.php";
         if ($result = mysqli_query($conn , $sql)){
             if(mysqli_num_rows($result) > 0){
                 while($row = $result->fetch_assoc()) {
-                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["email"]."</td> <td>".$row["roles"]."</td>  <td>".$row["password"]."</td> <td>".$row["is_verified"]."</td> <td>".$row["service"]."</td> <td>".$row["nom"]."</td><td>".$row["prenom"]."</td>
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["email"]."</td> <td>".$row["roles"]."</td>  <td>***</td> <td>".$row["service"]."</td> <td>".$row["nom"]."</td><td>".$row["prenom"]."</td>
                             <td>
                             <a href=\"./".$row["id"]."\">show</a>
                             <a href=\"./".$row["id"]."/edit\">edit</a>
@@ -243,6 +248,119 @@ include "dbcon.php";
                             <td>
                             <a href=\"./".$row["id"]."\">show</a>
                             <a href=\"./".$row["id"]."/edit\">edit</a>
+                            </td>
+                            </tr>";
+                }
+            }
+            else{ echo "no records found";
+    
+            }
+            
+            }
+        }
+
+
+
+
+
+
+        
+        function rechercheplan($conn)
+
+        {
+           
+        $nom = $_POST['$nom'];
+        $option = $_POST['$option'];
+        $sql = "SELECT * FROM plan where $option = '$nom' ";
+        if ($result = mysqli_query($conn , $sql)){
+            if(mysqli_num_rows($result) > 0){
+                while($row = $result->fetch_assoc()) {
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["reference_tmg"]."</td> <td>".$row["statut"]."</td>  <td>".$row["priorite"]."</td> 
+                            <td>
+                            <a href=\"./".$row["id"]."\">show</a>
+                            <a href=\"./".$row["id"]."/edit\">edit</a>
+                            </td>
+                            </tr>";
+                }
+            }
+            else{ echo "no records found";
+    
+            }
+            
+            }
+        }
+
+
+        function recherchequa($conn)
+
+        {
+           
+        $nom = $_POST['$nom'];
+        $option = $_POST['$option'];
+        $sql = "SELECT * FROM qualite_m where $option = '$nom' ";
+        if ($result = mysqli_query($conn , $sql)){
+            if(mysqli_num_rows($result) > 0){
+                while($row = $result->fetch_assoc()) {
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["reference_tmg"]."</td> <td>Report</td>  <td>".$row["image"]."</td> 
+                            <td>
+                            <a href=\"./".$row["id"]."\">show</a>
+                           
+                            </td>
+                            </tr>";
+                }
+            }
+            else{ echo "no records found";
+    
+            }
+            
+            }
+        }
+
+
+
+
+
+        function rechercherap($conn)
+
+        {
+           
+        $nom = $_POST['$nom'];
+        $option = $_POST['$option'];
+        $sql = "SELECT * FROM rapport where $option = '$nom' ";
+        if ($result = mysqli_query($conn , $sql)){
+            if(mysqli_num_rows($result) > 0){
+                while($row = $result->fetch_assoc()) {
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["titre"]."</td> <td>Report</td>  
+                            <td>
+                            <a href=\"./".$row["id"]."\">show</a>
+                            <a href=\"./".$row["id"]."/edit\">edit</a>
+                            </td>
+                            </tr>";
+                }
+            }
+            else{ echo "no records found";
+    
+            }
+            
+            }
+        }
+
+
+        
+        function recherchehis($conn)
+
+        {
+           
+        $nom = $_POST['$nom'];
+        $option = $_POST['$option'];
+        $sql = "SELECT * FROM history where $option = '$nom' ";
+        if ($result = mysqli_query($conn , $sql)){
+            if(mysqli_num_rows($result) > 0){
+                while($row = $result->fetch_assoc()) {
+                    echo  " <tr> <td>".$row["id"]."</td> <td>".$row["message"]."</td> <td>".$row["date"]."</td>
+                            <td>
+                            
+                            <a href=\"./".$row["id"]."/edit\"></a>
                             </td>
                             </tr>";
                 }

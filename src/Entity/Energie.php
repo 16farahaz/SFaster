@@ -6,8 +6,12 @@ use App\Repository\EnergieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
+ * @UniqueEntity("Nom")
  * @ORM\Entity(repositoryClass=EnergieRepository::class)
  */
 class Energie
@@ -20,11 +24,15 @@ class Energie
     private $id;
 
     /**
+     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $Nom;
 
     /**
+     * @Assert\GreaterThan(0)
+     * @Assert\Positive
+     * @Assert\Type("float")
      * @ORM\Column(type="float")
      */
     private $PrixH;

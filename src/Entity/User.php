@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -21,6 +22,9 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -42,16 +46,22 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("String")
      * @ORM\Column(type="string", length=255)
      */
     private $Service;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("String")
      * @ORM\Column(type="string", length=255)
      */
     private $Nom;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("String")
      * @ORM\Column(type="string", length=255)
      */
     private $Prenom;
@@ -184,4 +194,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getFullName() {
+        return $this->Nom." ".$this->Prenom;
+    }
+
 }

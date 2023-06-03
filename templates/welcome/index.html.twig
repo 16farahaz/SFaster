@@ -82,7 +82,28 @@
     left:5px;
     top: 40px;
 }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4e73df;
+  color: white;
+}
 
 </style>
 </head>
@@ -108,33 +129,28 @@
 <!--main area-->
 
 <div class="container">
-   <div class="box">
-       <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-       </p>
-   </div>
-   
-   <div class="box">
-       <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-       </p>
-   </div>
-   
-   <div class="box">
-       <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-       </p>
-   </div>
-   
-   <div class="box">
-       <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi tenetur odio illo, ullam inventore nihil dicta! Repellat quas hic voluptas officiis laborum commodi, minima maiores dolorem tempora voluptatibus, repudiandae quibusdam?
-       </p>
-   </div>
+
+<div >
+    <table class="table" id="customers" >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>T.M.G Reference</th>
+                <th>State</th>
+                <th>Priority</th>
+                <th>date Limit</th>
+
+            </tr>
+        </thead>
+        <tbody id="tab">
+           
+        </tbody>
+    </table>
+</div>
+
+
+</div>
+
 </div>
 
 </body>
@@ -143,4 +159,22 @@
 
 </body>
 </html>
+<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+       
+            $.ajax({
+                url: "{{ asset('ajax/Plan.php') }}",
+                type: 'POST',
+                data: {
+                    action: 'affichage' ,
 
+                },
+                success: function (data) {
+                    $("#tab").html(data);
+                }
+            });
+        
+    });
+       
+</script>

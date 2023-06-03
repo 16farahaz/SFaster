@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block body %}
 <form id="form_modele"  >
@@ -19,15 +19,20 @@
     <select id="combolist_gamme_usinage" class="form-control" >
     </select>
    </div>
+
    <div>
    <label type = "text"  > machine's power : </label>
    <label type = "text" id ="puissancemachine"  > </label></br>
    </div>
+
    <div>
    <label>energie</label>
    <select id="combolist_energie" class="form-control" >
    </select>
    </div>
+
+
+
    <div>
    <label type = "text"  > energie's price : </label> 
    <label type = "text" id = "prixenergie" ></label> </br>
@@ -56,6 +61,7 @@
     <label type = "text"  > tool's price :</label>
     <label type = "text" id = "prixoutil" ></label>
     </div>
+
     <div>
     <label type = "text" > time (minute) </label>
     <input type ="number" id="temps"></input>
@@ -65,8 +71,9 @@
     <label>Accessory</label>
     <select id="combolist_accessoire" class="form-control" >
     </select>
-</div>
-<div>
+    </div>
+
+    <div>
 <label type = "text"  > accessory's price (for one): </label> 
 <label type = "text" id = "pa" ></label> </br>
 
@@ -81,10 +88,12 @@
 <label > tools's price </label>
 <label type = "text" id ="prixtotale"></label>
 </div>
+
 <div>
 <label type = "text"  > materilas's price for this operation  : </label>
 <label type = "text" id ="prixtotalematiere"  > </label></br>
 </div>
+
 <div>
 <label type = "float" > operation's price : </label>
 <label type = "float" id ="prixtotaleenergie"></label>
@@ -113,6 +122,50 @@
 
 
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -467,4 +520,654 @@
        
     </script>
 
- {% endblock %}
+ {% endblock %} #}
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Complaint Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      padding-left:150px;
+      padding-right:150px;
+      background-color:#4e73df;
+      }
+      body, div, form, input, select, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      margin: 15px 0;
+      font-weight: 400;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 3px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px #ccc; 
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      select {
+      width: 100%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 6px);
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item:hover p, .item:hover i {
+      color: #095484;
+      }
+      input:hover, select:hover, textarea:hover, .preferred-metod label:hover input {
+      box-shadow: 0 0 5px 0 #095484;
+      }
+      .preferred-metod label {
+      display: block;
+      margin: 5px 0;
+      }
+      .preferred-metod:hover input {
+      box-shadow: none;
+      }
+      .preferred-metod-item input, .preferred-metod-item span {
+      width: auto;
+      vertical-align: middle;
+      }
+      .preferred-metod-item input {
+      margin: 0 5px 0 0;
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+      .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      font-size: 20px;
+      color: #a9a9a9;
+      }
+      .item i {
+      right: 1%;
+      top: 30px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 0;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      .btn-block {
+      margin-top: 20px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;      
+      -webkit-border-radius: 5px; 
+      -moz-border-radius: 5px; 
+      border-radius: 5px; 
+      background-color: #4e73df;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background-color: #0666a3;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .city-item input {
+      width: calc(50% - 20px);
+      }
+      .city-item select {
+      width: calc(50% - 8px);
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="testbox">
+      <form  id ="form_modele" action="/">
+        <h1>Invoice Complaint Form</h1>
+       
+        <div class="item">
+      
+       
+          <div class="name-item">
+      <h3>Invoice number :  <label class"form-control"  id="idfacture"  ></label></h3>
+          </div>
+        </div>
+
+        <div id ="DIV"  class="item" >
+    <h3>  <label id"lab">Model </label></h3>
+      <select id="combolist_modele" class="form-control" >
+      </select></br>
+  
+</div>
+
+<div class="item">
+<h3><label>Operation</label></h3>
+<select id="combolist_gamme_usinage" class="form-control" >
+</select>
+</div>
+
+
+<div class"item">
+<h3 > <label type = "text"  style="color:#4e73df;" > Machine's power : </label>
+ <label type = "text" id ="puissancemachine"  style="color:Red;" > </label></h3>
+</div>
+
+
+<div class"item">
+<h3><label>Energie</label><h3>
+<select id="combolist_energie" class="form-control" >
+</select>
+</div>
+
+<div class="item">
+<h3><label type = "text" style="color:#4e73df;"  > energie's price : </label> 
+<label type = "text" id = "prixenergie"  style="color:Red;" ></label> </h3>
+</div>
+
+
+<div class="item">
+<h3><label>Materila</label></h3>
+<select id="combolist_matiere" class="form-control" >
+</select>
+</div>
+
+<div class="item">
+<h3><label type = "text"  style="color:#4e73df;"> Material's price (for cubic meter): </label> 
+<label type = "text" id = "prixmatiere" style="color:Red;"  ></label></h3>
+<h3>
+
+<input type ="number" id="quantity" style="color:Red;"  placeholder="Quantity"></input></h3>
+</div>
+
+  <div class="item" >
+     <h3> <label>tool</label></h3>
+      <select id="combolist_outil" class="form-control" >
+      </select>
+  </div>
+
+  <div class="item">
+  <h3><label type = "text" style="color:#4e73df;" > tool's price :</label>
+  <label type = "text" id = "prixoutil" style="color:Red;"  ></label></h3>
+  </div>
+
+  <div class="item">
+ 
+  <input type ="number" id="temps" placeholder="Time (minute)">
+  </div>
+
+  <div class="item">
+  <h3><label>Accessory</label></h3>
+  <select id="combolist_accessoire" class="form-control" >
+  </select>
+  </div>
+
+  <div class="item">
+
+<h3><label type = "text"  style="color:#4e73df;" > accessory's price (for one): </label> 
+<label type = "text" id = "pa" style="color:Red;"  ></label></h3></br>
+
+
+<input type ="number" id="qa" placeholder="Accessories number"></br>
+</div>
+  
+ 
+
+
+<div class="item">
+<h3><label  style="color:#4e73df;"> tools's price </label>
+<label type = "text" id ="prixtotale" style="color:Red;"></label></h3>
+</div>
+
+<div class"item">
+<h3>
+<label type = "text"  style="color:#4e73df;" > materilas's price for this operation  : </label>
+<label type = "text" id ="prixtotalematiere" style="color:Red;" > </label></h3>
+</div>
+
+<div class"item">
+<h3><label type = "float"  style="color:#4e73df;"> operation's price : </label>
+<label type = "float" id ="prixtotaleenergie" style="color:Red;"></label></h3>
+</div>
+<div class"item">
+<h3><label type = "text" style="color:#4e73df;" > accessories's price for this operation  : </label>
+<label type = "text" id ="pta"  style="color:Red;" > </label></h3></br>
+</div>
+
+
+
+
+<div id ="DIVEMP" class"name-item">
+<div class="item">
+<input type = "number" id = "employer" placeholder=" Employer's number  (for all the pices)" > </br>
+
+<input type ="float" id="salaire" placeholder="employer 's salary (for all the pices)"></br>
+
+
+<input type ="number" id="nbrpiece" placeholder="Model's quantity" ></br>
+
+</div >
+
+
+</div>
+
+
+<button type="submit" id="ajouter_modele"  class="btn-block" >next</button> 
+
+</h3 style="color:Red; " ><label class="item" type = "text " id="message" ></label></h3>
+
+<h2><label style="color:red;" class="item" type = "text " id="message" ></label></h2>
+
+
+        <div class="btn-block">
+         <button> <a type="submit" href="{{ path('facture_index') }}"  style="color:white;"  style="floatt:left;" >complete</a></button>
+        </div>
+      <a href="{{ path('facture_index') }}"> Back To Liste</a>
+      </form>
+   
+    </div>
+
+
+
+
+
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+                $.ajax({
+                    url: "{{ asset('ajax/Facture.php') }}",
+                    type: 'POST',
+                    data: {
+                                action: 'combolist_modele' ,
+                            },
+                            success: function (data) {
+                                $("#combolist_modele").html(data);
+                                $("#combolist_modele").css({visibility: 'visible'});
+
+                            }
+                        });
+
+
+                        $.ajax({
+                            url: "{{ asset('ajax/Facture.php') }}",
+                            type: 'POST',
+                            data: {
+                                action: 'combolist_gamme_usinage' ,
+                            },
+                            success: function (data) {
+                            
+                      //  $("#combolist_modele").attr("modele_id",data);
+                    //    $("#combolist_modele").css({display: 'none'});
+                       // $("#combolist_modele").css({display: 'none'});
+
+                              $("#combolist_gamme_usinage").html(data);
+                            }
+                        });
+                        $.ajax({
+                            url: "{{ asset('ajax/Facture.php') }}",
+                            type: 'POST',
+                            data: {
+                                action: 'combolist_matiere' ,
+                            },
+                            success: function (data) {
+                              $("#combolist_matiere").html(data);
+                            }
+                        });
+                        $.ajax({
+                            url: "{{ asset('ajax/Facture.php') }}",
+                            type: 'POST',
+                            data: {
+                                action: 'combolist_accessoire' ,
+                            },
+                            success: function (data) {
+                              $("#combolist_accessoire").html(data);
+                            }
+                        });
+
+                        
+            $.ajax({
+                            url: "{{ asset('ajax/Facture.php') }}",
+                            type: 'POST',
+                            data: {
+                                action: 'combolist_outil' ,
+                            },
+                            success: function (data) {
+                              $("#combolist_outil").html(data);
+                            }
+                        });
+
+                        $.ajax({
+                            url: "{{ asset('ajax/Facture.php') }}",
+                            type: 'POST',
+                            data: {
+                                action: 'combolist_energie' ,
+                            },
+                            success: function (data) {
+                              $("#combolist_energie").html(data);
+                            }
+                        });
+            
+       
+                $.ajax({
+                    url: "{{ asset('ajax/Facture.php') }}",
+                    type: 'POST',
+                    data: {
+                        action: 'code_action' ,
+                    },
+                    success: function (data) {
+                        $("#idfacture").html(data)  ;
+                    }
+                });
+
+                    //pour afficher prix de l'outil   
+            
+            $("#combolist_outil").change( function () {
+            
+               $.ajax({
+               type:"POST",
+               url : "{{ asset('ajax/Facture.php') }}",
+               data :{ 
+                        
+                        action: 'prix_outil' ,
+                        $outils_id: parseInt($("#combolist_outil option:selected").attr("outil_id")),
+                       },
+              success : function(data) {
+                
+               $("#prixoutil").html(data);
+             }
+      
+                    });
+                           
+             });
+             //pour afficher prix l'accessoire
+             $("#combolist_accessoire").change( function () {
+            
+            $.ajax({
+            type:"POST",
+            url : "{{ asset('ajax/Facture.php') }}",
+            data :{ 
+                     
+                     action: 'prix_accessoire' ,
+                     $accessoires_id: parseInt($("#combolist_accessoire option:selected").attr("accessoire_id")),
+                    },
+           success : function(data) {
+             
+            $("#pa").html(data);
+          }
+   
+                 });
+                        
+          });
+                //pour calculer le prix de tous les accessoires pour cette operation   
+        $("#qa").change( function () {
+            
+            $.ajax({
+            type:"POST",
+            url : "{{ asset('ajax/Facture.php') }}",
+            data :{ 
+                     $accessoires_id: parseInt($("#combolist_accessoire option:selected").attr("accessoire_id")),
+                     $qa: $("#qa").val(),
+                     $pa:  $("#pa").html(),
+                     action: 'prix_totale_accessoire' ,
+                    },
+           success : function(data) {
+
+            $("#pta").html(data);
+          }
+   
+                 });
+                        
+         });
+
+
+
+
+
+            $("#temps").change( function () {
+            
+               $.ajax({
+               type:"POST",
+               url : "{{ asset('ajax/Facture.php') }}",
+               data :{ 
+                        $outils_id: parseInt($("#combolist_outil option:selected").attr("outil_id")),
+                        $temps: $("#temps").val(),
+                        $prix:  $("#prixoutil").html(),
+                        action: 'prix_totale' ,
+                       },
+              success : function(data) {
+
+               $("#prixtotale").html(data);
+             }
+      
+                    });
+                           
+            });
+
+ 
+            $("#combolist_energie").change( function () {
+           
+               $.ajax({
+               type:"POST",
+               url : "{{ asset('ajax/Facture.php') }}",
+               data :{ 
+                        $energies_id: parseInt($("#combolist_energie option:selected").attr("energie_id")),
+                        action: 'prix_energie' ,
+                       },
+              success : function(data) {
+
+               $("#prixenergie").html(data);
+             }
+      
+                    });
+                           
+            });
+ 
+
+            
+            $("#combolist_gamme_usinage").change( function () {
+           
+           $.ajax({
+           type:"POST",
+           url : "{{ asset('ajax/Facture.php') }}",
+           data :{ 
+                    $gamme_usinages_id: parseInt($("#combolist_gamme_usinage option:selected").attr("gamme_usinage_id")),
+                    action: 'puissance_machine' ,
+                   },
+          success : function(data) {
+
+           $("#puissancemachine").html(data);
+         }
+  
+                });
+                       
+        });
+
+        $("#temps").change( function () {
+            
+            $.ajax({
+            type:"POST",
+            url : "{{ asset('ajax/Facture.php') }}",
+            data :{ 
+                     $gamme_usinages_id: parseInt($("#combolist_gamme_usinage option:selected").attr("gamme_usinage_id")),
+                     $energies_id: parseInt($("#combolist_energie option:selected").attr("energie_id")),
+                     $temps: $("#temps").val(),
+                     $puissancemachine:  $("#puissancemachine").html(),
+                     $prixenergies:  $("#prixenergie").html(),
+                     action: 'prix_totale_energie_machine' ,
+                    },
+           success : function(data) {
+
+            $("#prixtotaleenergie").html(data);
+          }
+   
+                 });
+                        
+         });
+
+                          
+            $("#combolist_matiere").change( function () {
+           
+           $.ajax({
+           type:"POST",
+           url : "{{ asset('ajax/Facture.php') }}",
+           data :{ 
+                    $matieres_id: parseInt($("#combolist_matiere option:selected").attr("matiere_id")),
+                    action: 'prix_matiere' ,
+                   },
+          success : function(data) {
+
+           $("#prixmatiere").html(data);
+         }
+  
+                });
+                       
+        });                   
+                               
+                                      
+
+
+        $("#quantity").change( function () {
+            
+            $.ajax({
+            type:"POST",
+            url : "{{ asset('ajax/Facture.php') }}",
+            data :{ 
+                     $matieres_id: parseInt($("#combolist_matiere option:selected").attr("matiere_id")),
+                     $quantity: $("#quantity").val(),
+                     $prixmatiere:  $("#prixmatiere").html(),
+                     action: 'prix_totale_matiere' ,
+                    },
+           success : function(data) {
+
+            $("#prixtotalematiere").html(data);
+          }
+   
+                 });
+                        
+         });
+
+                                
+
+
+
+
+            $("#form_modele").on("submit", function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ asset('ajax/Facture.php') }}",
+                    type: 'POST',
+                    data: {
+                        action: 'ajouter_outil' , 
+
+                        $outil_id: parseInt($("#combolist_outil option:selected").attr("outil_id")),
+                        $modele_id: parseInt($("#combolist_modele option:selected").attr("modele_id")) ,    
+                        $gamme_usinages_id: parseInt($("#combolist_gamme_usinage option:selected").attr("gamme_usinage_id")),
+                        $energies_id: parseInt($("#combolist_energie option:selected").attr("energie_id")),
+                        $matieres_id: parseInt($("#combolist_matiere option:selected").attr("matiere_id")),
+                        $accessoires_id: parseInt($("#combolist_accessoire option:selected").attr("accessoire_id")),
+
+                        $idfacture: $("#idfacture").html(),
+                        $temps: $("#temps").val(),
+                        $prix:  $("#prixoutil").html(),
+                        $prixtotale: $("#prixtotale").html(),
+                        $prixenergie: $("#prixenergie").html(),
+                        $puissancemachine: $("#puissancemachine").html(),
+                        $prixtotaleenergie: $("#prixtotaleenergie").html(),
+                        $quantity: $("#quantity").val(),
+                        $employer: $("#employer").val(),
+                        $salaire: $("#salaire").val(),
+                        $nbrpiece: $("#nbrpiece").val(),
+                        $prixmatiere: $("#prixmatiere").html(),
+                        $prixtotalematiere:  $("#prixtotalematiere").html(),
+
+                        $qa:  $("#qa").val(),
+                        $pa:  $("#pa").html(),
+                        $pta: $("#pta").html(),
+
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        $("#combolist_modele").attr("modele_id",data);
+                        $("#combolist_modele").css({display: 'none'});
+                        $("#DIV").css({display: 'none'});
+                        $("#nbrpiece").val();
+                        $("#employer").val();
+                        $("#salaire").val();
+                      //  $("#DIVEMP").css({display: 'none'});
+                       // $("#salaire").load("#salaire");
+
+                      //  setInterval('location.reload()',5000); 
+                    }
+                   
+                });
+                          $.ajax({
+                         type:"POST",
+                         url : "{{ asset('ajax/Facture.php') }}",
+                         data :{ 
+                    
+                     action: 'message' ,
+                    },
+                         success : function(data) {
+                         $("#message").html(data);
+               
+                              }
+   
+                             });
+            });
+
+         });
+         
+       
+    </script>

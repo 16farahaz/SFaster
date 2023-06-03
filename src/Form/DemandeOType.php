@@ -8,12 +8,15 @@ use App\Entity\FormData;
 use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 
 class DemandeOType extends AbstractType
@@ -24,14 +27,16 @@ class DemandeOType extends AbstractType
             ->add('Responsable',TextType::class, array(
 
 
-             'attr'=> array(  'placeholder' => 'Sender'))
+             'attr'=> array(  'placeholder' => 'Sender',
+                             
+             ))
             )
             ->add('Service',TextType::class, array(
 
                 'attr'=> array(  'placeholder' => 'Service')))
             ->add('ResponsableMag',TextType::class, array(
                 'empty_data' => ' Mejed Chaabi',
-
+                'required' => false,
                 'attr'=> array(  'placeholder' => 'store manager')))
             ->add('RefTMG',TextType::class, array(
 
@@ -49,41 +54,59 @@ class DemandeOType extends AbstractType
 
                 'attr'=> array(  'placeholder' => 'Description')))
             
+                
             ->add('Doc',TextType::class, array(
 
                 'attr'=> array(  'placeholder' => 'Documentation')))
-            ->add('Type',TextType::class, array(
-
-                'attr'=> array(  'placeholder' => 'Type')))
+            ->add('Type',ChoiceType::class, array(
+                'required' => true,
+                'multiple' => false,
+                'expanded' => false,
+                'choices'  => [
+                  'New' => 'New request',
+                  'Optimizing' => 'Optimizing',
+                  'Duplication' => 'Duplication',
+                ],
+                
+                'placeholder' => 'Type'
+              ))
             ->add('ResponsableADMI',TextType::class, array(
 
-                'attr'=> array(  'placeholder' => 'Adminitration manger')))
-            ->add('Confirmation',TextType::class, array(
-
-                'attr'=> array(  'placeholder' => 'Confirmation')))
+                'attr'=> array(  'placeholder' => 'Adminitration manger'),
+                'empty_data'=>' Waiting'
+                ))
+            ->add('Confirmation',ChoiceType::class, array(
+                'required' => true,
+                'multiple' => false,
+                'expanded' => false,
+                'choices'  => [
+                  'Not confirmed' => 'Not confirmed',
+                  'In progress' => 'In progress',
+                  'Confirmed' => 'Confirmed',
+                ],
+                
+                'placeholder' => 'Confirmation',
+                'empty_data'=>' Waiting'
+              ))
          
-            ->add('Statut',TextType::class, array(
-
-                'attr'=> array(  'placeholder' => 'Request state')))
-
-
-
-
-            ->add('Priorite', NumberType::class, array(
-                'empty_data' => '1',
-                'attr'=> array(  'placeholder' => 'priority'))    )
-
-
-
-
 
 
             ->add('ResponsableTechnique',TextType::class, array(
 
                 'attr'=> array(  'placeholder' => 'Director')))
-            ->add('confirmationDemande',TextType::class, array(
-
-                'attr'=> array(  'placeholder' => 'Agree')))
+            ->add('confirmationDemande',ChoiceType::class, array(
+                'required' => true,
+                'multiple' => false,
+                'expanded' => false,
+                'choices'  => [
+                  'Not confirmed' => 'Not confirmed',
+                  'In progress' => 'In progress',
+                  'Confirmed' => 'Confirmed',
+                ],
+                
+                'placeholder' => ' final Confirmation',
+                'empty_data'=>' Waiting'
+              ))
             ->add('ReferenceMag',TextType::class, array(
 
                 'attr'=> array(  'placeholder' => 'Store ID')))
@@ -118,7 +141,14 @@ class DemandeOType extends AbstractType
             ])
            
 
-
+            ->add('date', DateType::class, array(
+                'attr'=> array('format'=>"dd/MM/yyyy hh:mm:ss")
+                
+            ))
+            ->add('datefin', DateType::class, array(
+                'attr'=> array('format'=>"dd/MM/yyyy hh:mm:ss")
+                
+            ));
 
 
             

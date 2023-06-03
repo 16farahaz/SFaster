@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\HistoryRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +27,10 @@ class History
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    public function __construct(){
+        $this->date= new \DateTime();
+    }
 
     public function getId(): ?int
     {

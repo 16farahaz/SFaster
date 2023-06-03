@@ -1,34 +1,4 @@
-{#{% extends 'base.html.twig' %}
 
-{% block title %}Matiere{% endblock %}
-
-{% block body %}
-    <h1>Matiere</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ matiere.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ matiere.Nom }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ matiere.Prix }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('matiere_index') }}">back to list</a>
-
-    <a href="{{ path('matiere_edit', {'id': matiere.id}) }}">edit</a>
-
-    {{ include('matiere/_delete_form.html.twig') }}
-{% endblock %}
-#}
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,6 +12,8 @@
     
         <!-- Custom styles for this page -->
         <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
       <style>
  html{
     margin-top: 30px;
@@ -125,8 +97,57 @@ font-family: Verdana, sans-serif;
 
 </div>
 
+
+
+
+
+
+
+<audio id="mySound" src="{{asset('sound/error.mp3')}}"></audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/discover').then(result=>{
+            const hubUrl = result.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+            let url = new URL(hubUrl);
+            url.searchParams.append('topic','notif');
+
+            const eventSource= new EventSource(url);
+            
+            eventSource.onmessage= (event) => {
+                var message =JSON.parse(event.data).message;
+                
+                var myAudio = document.getElementById("mySound");
+                myAudio.play();
+
+                $.toast({ 
+                    text : message, 
+                    showHideTransition : 'fade', 
+                    allowToastClose : true,      
+                    hideAfter : 8000,            
+                    stack : 5,                    
+                    textAlign : 'left',            
+                    position : 'bottom-left',    
+                    icon: 'info',
+                    loader: true,      
+                    loaderBg: '#A4DCF1'  
+                });
+            
+            }
+        })
+    });
+</script>
+
+
+
+
+
+
+
      <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+ 
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->

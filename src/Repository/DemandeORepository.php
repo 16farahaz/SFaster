@@ -47,4 +47,21 @@ class DemandeORepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+    * returns number of "Demandes" per day
+    * @return void 
+    */
+
+    public function countByDate(){
+
+       $query = $this-> createQueryBuilder('a')
+       ->select('SUBSTRING(a.date,1,10)AS date_demande, COUNT(a)as count')
+       ->groupBy('date_demande');
+       return $query->getQuery()->getResult();
+
+
+
+
+    }
 }

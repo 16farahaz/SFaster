@@ -33,6 +33,7 @@ class User1Type extends AbstractType
                   'User' => 'ROLE_USER',
                  
                   'Admin' => 'ROLE_ADMIN',
+                  'RQuality'=>'ROLE_QUALITY',
                 ],
             ])
             ->add('password',TextType::class, array(

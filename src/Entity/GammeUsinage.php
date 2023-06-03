@@ -6,6 +6,9 @@ use App\Repository\GammeUsinageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=GammeUsinageRepository::class)
@@ -20,11 +23,13 @@ class GammeUsinage
     private $id;
 
     /**
+     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $Operation;
 
     /**
+     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $Machine;
@@ -36,6 +41,7 @@ class GammeUsinage
     private $modeles;
 
     /**
+     * @Assert\Positive
      * @ORM\Column(type="float")
      */
     private $PuissanceMachine;

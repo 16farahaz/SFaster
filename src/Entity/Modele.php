@@ -24,8 +24,8 @@ class Modele
      *  @Assert\Length(
      *      min = 11,   
      *      max = 12,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "ReferenceTMG must be at least {{ limit }} characters long",
+     *      maxMessage = "ReferenceTMG cannot be longer than {{ limit }} characters"
      * )
      *
      * @Assert\NotBlank
@@ -37,8 +37,8 @@ class Modele
      *   @Assert\Length(
      *      min = 11,
      *      max = 12,
-     *      minMessage = "Your first name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     *      minMessage = "ReferenceBU must be at least {{ limit }} characters long",
+     *      maxMessage = "ReferenceBU cannot be longer than {{ limit }} characters"
      * )
      * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
@@ -46,7 +46,9 @@ class Modele
     private $ReferenceBU;
 
     /**
-     *  
+     * @Assert\GreaterThan(0)
+     * @Assert\Positive
+     * @Assert\Type("integer")
      * @Assert\NotBlank
      * @ORM\Column(type="integer")
      */

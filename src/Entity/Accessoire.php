@@ -6,8 +6,15 @@ use App\Repository\AccessoireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @UniqueEntity(
+ *     fields={"ReferenceTMG", "ReferenceBU"},
+ *     errorPath="ReferenceTMG",
+ *     message="This Accesssory is already in data."
+ * )
  * @ORM\Entity(repositoryClass=AccessoireRepository::class)
  */
 class Accessoire
@@ -20,21 +27,39 @@ class Accessoire
     private $id;
 
     /**
+     *  @Assert\Length(
+     *      min = 11,   
+     *      max = 12,
+     *      minMessage = "ReferenceTMG must be at least {{ limit }} characters long",
+     *      maxMessage = "ReferenceTMG cannot be longer than {{ limit }} characters"
+     * )
+     *
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $ReferenceTMG;
 
     /**
+     * @Assert\Length(
+     *      min = 11,   
+     *      max = 12,
+     *      minMessage = "ReferenceTMG must be at least {{ limit }} characters long",
+     *      maxMessage = "ReferenceTMG cannot be longer than {{ limit }} characters"
+     * )
+     *
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $ReferenceBU;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $ReferenceMag;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $EmplacementMag;
@@ -45,6 +70,9 @@ class Accessoire
     private $modeles;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Positive
+     * @Assert\Type("float")
      * @ORM\Column(type="float")
      */
     private $PrixA;

@@ -39,7 +39,10 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/user, roles: ROLE_USER }
+         - { path: ^/RQualite, roles: ROLE_QUALITY }
     
 
     
-           
+    role_hierarchy:
+        ROLE_QUALITY: ROLE_USER
+        ROLE_ADMIN: ROLE_QUALITY      

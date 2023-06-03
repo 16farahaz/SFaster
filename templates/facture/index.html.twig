@@ -1,45 +1,3 @@
-{#{% extends 'base.html.twig' %}
-
-{% block title %}Invoices{% endblock %}
-
-{% block body %}
-    <h1>Invoices's List</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Model's ID</th>
-                <th>Invoice's ID</th>
-                <th>Actions</th>
-                    
-            </tr>
-        </thead>
-        <tbody>
-        {% for facture in factures %}
-            <tr>
-                <td>{{ facture.id }}</td>
-                <td>{{ facture.modeleId }}</td>
-                <td>{{ facture.idfacture }}</td>
-               
-                <td>
-                    <a href="{{ path('facture_show', {'id': facture.id}) }}">show</a>
-                    <a href="{{ path('facture_show', {'id': facture.id}) }}">print </a>
-                    <a href="{{ path('facture_edit', {'id': facture.id}) }}">edit</a>
-
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="24">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('facture_new') }}">Create new</a>
-{% endblock %}
-#}
 
 
 <!DOCTYPE html>
@@ -65,7 +23,8 @@
     
         <!-- Custom styles for this page -->
         <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 </head>
 
@@ -248,56 +207,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
+                     
                        
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -308,7 +218,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{app.user.Nom}} {{app.user.Prenom}}</span>
                             <img class="img-profile rounded-circle"
-                                src="img/undraw_profile.svg">
+                                src="{{asset('img/undraw_profile.svg')}}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -378,10 +288,6 @@
                                             <i class="fas fa-info-circle"></i>
                                         </span>
                                         <span class="text">Show</span></a> 
-                                                <a  class="btn btn-warning btn-icon-split"  href="{{ path('facture_edit', {'id': facture.id}) }}"><span class="icon text-white-50">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </span>
-                                        <span class="text">Edit</span></a>
                                                
                                             </td>
                                         </tr>
@@ -443,8 +349,46 @@
         </div>
     </div>
 
+
+
+<audio id="mySound" src="{{asset('sound/error.mp3')}}"></audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/discover').then(result=>{
+            const hubUrl = result.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+            let url = new URL(hubUrl);
+            url.searchParams.append('topic','notif');
+
+            const eventSource= new EventSource(url);
+            
+            eventSource.onmessage= (event) => {
+                var message =JSON.parse(event.data).message;
+                
+                var myAudio = document.getElementById("mySound");
+                myAudio.play();
+
+                $.toast({ 
+                    text : message, 
+                    showHideTransition : 'fade', 
+                    allowToastClose : true,      
+                    hideAfter : 8000,            
+                    stack : 5,                    
+                    textAlign : 'left',            
+                    position : 'bottom-left',    
+                    icon: 'info',
+                    loader: true,      
+                    loaderBg: '#A4DCF1'  
+                });
+            
+            }
+        })
+    });
+</script>
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -463,7 +407,7 @@
 </body>
 
 </html>
-<script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
+
 <script>
     $(document).ready(function() {
         $("#form_recherche").on("submit", function (event) {

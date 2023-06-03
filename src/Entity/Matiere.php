@@ -6,8 +6,11 @@ use App\Repository\MatiereRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @UniqueEntity("Nom")
  * @ORM\Entity(repositoryClass=MatiereRepository::class)
  */
 class Matiere
@@ -20,11 +23,14 @@ class Matiere
     private $id;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $Nom;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="integer")
      */
     private $Prix;
@@ -33,6 +39,11 @@ class Matiere
      * @ORM\ManyToMany(targetEntity=Modele::class, mappedBy="matieres")
      */
     private $modeles;
+
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $color;
 
     public function __construct()
     {
@@ -98,6 +109,18 @@ class Matiere
         if ($this->modeles->removeElement($modele)) {
             $modele->removeMatiere($this);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

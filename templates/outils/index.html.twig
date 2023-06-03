@@ -1,45 +1,3 @@
-{#{% extends 'base.html.twig' %}
-
-{% block title %}Outils index{% endblock %}
-
-{% block body %}
-    <h1>Outils index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Outil</th>
-                <th>DureeDeVie</th>
-                <th>PrixO</th>
-                <th>Caractéristique</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for outil in outils %}
-            <tr>
-                <td>{{ outil.id }}</td>
-                <td>{{ outil.Outil }}</td>
-                <td>{{ outil.DureeDeVie }}</td>
-                <td>{{ outil.PrixO }}</td>
-                <td>{{ outil.caracteristique }}</td>
-                <td>
-                    <a href="{{ path('outils_show', {'id': outil.id}) }}">show</a>
-                    <a href="{{ path('outils_edit', {'id': outil.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('outils_new') }}">Create new</a>
-{% endblock %}
-#}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +22,8 @@
     
         <!-- Custom styles for this page -->
         <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 </head>
 
@@ -89,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{path('home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Home</span></a>
             </li>
@@ -112,8 +71,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header ">Custom needs:</h6>
-                        <a class="collapse-item active" href="buttons.html">Requestes</a>
-                        <a class="collapse-item active" href="cards.html">Cards</a>
+                        <a class="collapse-item active" href="{{path('demande_o_index')}}">Requestes</a>
+                     
                     </div>
                 </div>
             </li>
@@ -129,10 +88,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Admin's home:</h6>
-                        <a class="collapse-item active" href="utilities-color.html">Users</a>
-                        <a class="collapse-item active" href="utilities-border.html">Planning</a>
-                        <a class="collapse-item active" href="utilities-animation.html">Archive</a>
-                        <a class="collapse-item active" href="utilities-other.html">Other</a>
+                        <a class="collapse-item active" href="{{path('user_index')}}">Users</a>
+                        <a class="collapse-item active" href="{{path('plan_index')}}">Planning</a>
+                    <a class="collapse-item active" href="{{path('history_index')}}">History</a>
+                <a class="collapse-item active" href="{{path('facture_index')}}">Estimate price </a>
                     </div>
                 </div>
             </li>
@@ -164,8 +123,9 @@
                         <a class="collapse-item active" href="{{ path('matiere_index') }}">Materials</a>
                         <div class="collapse-divider active"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item active" href="404.html">Files</a>
-                        <a class="collapse-item active" href="blank.html">Reporting</a>
+                    <a class="collapse-item active" href="{{path('form_data_index')}}">Files</a>
+                <a class="collapse-item active" href="{{path('qualite_m_index')}}">Quality</a>
+                <a class="collapse-item active" href="{{path('qualite_m_index')}}">Reporting</a>
                     </div>
                 </div>
             </li>
@@ -249,56 +209,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
+                    
                        
 
                         <div class="topbar-divider d-none d-sm-block"></div>
@@ -309,7 +220,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{app.user.Nom}} {{app.user.Prenom}}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="{{asset('img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -322,10 +233,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {# Activity Log  #}
-                                </a>
+                               
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href='{{path('app_logout')}}' data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout
@@ -349,10 +257,10 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <a class="btn btn-primary btn-icon-split" href="{{ path('matiere_new') }}">  <span class="icon text-white-50">
+                        <a class="btn btn-primary btn-icon-split" href="{{ path('outils_new') }}">  <span class="icon text-white-50">
                     <i class="fas fa-check"></i>
                 </span>
-                <span class="text">New Operation</span></a>
+                <span class="text">New Tool</span></a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -386,7 +294,7 @@
                                                 <a  class="btn btn-warning btn-icon-split"  href="{{ path('outils_edit', {'id': outil.id}) }}"><span class="icon text-white-50">
                                             <i class="fas fa-exclamation-triangle"></i>
                                         </span>
-                                        <span class="text">Edit</span></a>
+                                        <span class="text">Edit &nbsp;</span></a>
                                                
                                             </td>
                                         </tr>
@@ -449,10 +357,50 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
+
+<audio id="mySound" src="{{asset('sound/error.mp3')}}"></audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/discover').then(result=>{
+            const hubUrl = result.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+            let url = new URL(hubUrl);
+            url.searchParams.append('topic','notif');
+
+            const eventSource= new EventSource(url);
+            
+            eventSource.onmessage= (event) => {
+                var message =JSON.parse(event.data).message;
+                
+                var myAudio = document.getElementById("mySound");
+                myAudio.play();
+
+                $.toast({ 
+                    text : message, 
+                    showHideTransition : 'fade', 
+                    allowToastClose : true,      
+                    hideAfter : 8000,            
+                    stack : 5,                    
+                    textAlign : 'left',            
+                    position : 'bottom-left',    
+                    icon: 'info',
+                    loader: true,      
+                    loaderBg: '#A4DCF1'  
+                });
+            
+            }
+        })
+    });
+</script>
+
+
+    
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- Core plugin JavaScript-->
     <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
@@ -469,7 +417,6 @@
 </body>
 
 </html>
- <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
     <script>
         $(document).ready(function() {
             $("#form_recherche").on("submit", function (event) {

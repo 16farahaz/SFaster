@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=DemandeORepository::class)
@@ -34,18 +34,30 @@ class DemandeO
     private $Service;
 
     /**
-     * @Assert\NotBlank
+     * 
      * @ORM\Column(type="string", length=255)
      */
     private $ResponsableMag;
 
     /**
+     *  @Assert\Length(
+     *      min = 11,   
+     *      max = 12,
+     *      minMessage = "ReferenceTMG must be at least {{ limit }} characters long",
+     *      maxMessage = "ReferenceTMG cannot be longer than {{ limit }} characters"
+     * )
      * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $RefTMG;
 
     /**
+     *  @Assert\Length(
+     *      min = 11,   
+     *      max = 12,
+     *      minMessage = " B.U Reference  must be at least {{ limit }} characters long",
+     *      maxMessage = " B.U Reference cannot be longer than {{ limit }} characters"
+     * )
      * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
@@ -94,17 +106,9 @@ class DemandeO
     private $Confirmation;
 
     
-    /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Statut;
+    
 
-    /**
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $Priorite;
+    
 
     /**
      * @Assert\NotBlank
@@ -132,9 +136,27 @@ class DemandeO
     private $formData;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity=Facture::class, inversedBy="demandeOs")
      */
     private $Facture;
+
+    /**
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * 
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nmb;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $datefin;
     
 
     public function __toString() {
@@ -299,29 +321,7 @@ class DemandeO
 
     
 
-    public function getStatut(): ?string
-    {
-        return $this->Statut;
-    }
-
-    public function setStatut(string $Statut): self
-    {
-        $this->Statut = $Statut;
-
-        return $this;
-    }
-
-    public function getPriorite(): ?int
-    {
-        return $this->Priorite;
-    }
-
-    public function setPriorite(int $Priorite): self
-    {
-        $this->Priorite = $Priorite;
-
-        return $this;
-    }
+   
 
     public function getResponsableTechnique(): ?string
     {
@@ -396,6 +396,42 @@ class DemandeO
     public function setFacture(?Facture $Facture): self
     {
         $this->Facture = $Facture;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getNmb(): ?int
+    {
+        return $this->nmb;
+    }
+
+    public function setNmb(?int $nmb): self
+    {
+        $this->nmb = $nmb;
+
+        return $this;
+    }
+
+    public function getDatefin(): ?\DateTimeInterface
+    {
+        return $this->datefin;
+    }
+
+    public function setDatefin(?\DateTimeInterface $datefin): self
+    {
+        $this->datefin = $datefin;
 
         return $this;
     }

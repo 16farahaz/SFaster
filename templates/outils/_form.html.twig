@@ -1,120 +1,261 @@
-{#{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
-#}
+
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-        <link
-            href="{{asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i')}}"
-            rel="stylesheet">
-    
-        <!-- Custom styles for this template-->
-        <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-    
-        <!-- Custom styles for this page -->
-        <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-        <style>
-html{
-    margin-top: 30px;
-  margin-bottom: 30px;
-  margin-right: 30px;
-  margin-left: 30px;
-  background-color:#4e73df;
-  padding-top: 30px;
-  padding-right: 80px;
-  padding-bottom:30px;
-  padding-left: 80px;
-}
+  <head>
+    <title>Student Complaint Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" integrity="sha512-8D+M+7Y6jVsEa7RD6Kv/Z7EImSpNpQllgaEIQAtqHcI0H6F4iZknRj0Nx1DCdB+TwBaS+702BGWYC0Ze2hpExQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-body{
-background-color:white;
+    <style>
+      html, body {
+      min-height: 100%;
+      padding-top:100px;
+      background-color:#4e73df;
+      
+      }
+      body, div, form, input, select, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      margin: 15px 0;
+      font-weight: 400;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 3px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px #ccc; 
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      select {
+      width: 100%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 6px);
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item:hover p, .item:hover i {
+      color: #095484;
+      }
+      input:hover, select:hover, textarea:hover, .preferred-metod label:hover input {
+      box-shadow: 0 0 5px 0 #095484;
+      }
+      .preferred-metod label {
+      display: block;
+      margin: 5px 0;
+      }
+      .preferred-metod:hover input {
+      box-shadow: none;
+      }
+      .preferred-metod-item input, .preferred-metod-item span {
+      width: auto;
+      vertical-align: middle;
+      }
+      .preferred-metod-item input {
+      margin: 0 5px 0 0;
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+      .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      font-size: 20px;
+      color: #a9a9a9;
+      }
+      .item i {
+      right: 1%;
+      top: 30px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 0;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      .btn-block {
+      margin-top: 20px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;      
+      -webkit-border-radius: 5px; 
+      -moz-border-radius: 5px; 
+      border-radius: 5px; 
+      background-color: #095484;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background-color: #0666a3;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .city-item input {
+      width: calc(50% - 20px);
+      }
+      .city-item select {
+      width: calc(50% - 8px);
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="testbox">
+    {{ form_start(form) }}
+      <form action="/">
 
-font-family: Verdana, sans-serif; 
- font-size: 100%;
- border-width: 2px 4px;
-  border-radius: 40px;
-  min-height: 100vh;
-  padding: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
+        <div class="item">
+         
 
-.idreft{
-    border-style: groove;
-
-}
+		  <h5> Tool information </h5>
+            <div class="name-item">
+         
+		    	{{ form_widget(form.Outil) }}
+			    {{ form_errors(form.Outil) }}
 
 
-            </style>
-    </head>
-<body>
-
-    
-<div class="container" >
-
-
-{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-
-
-<div id="idreft" >
-   
-    {{ form_label(form.Outil ,"Tool") }}
-    {{ form_widget(form.Outil) }}
-
-    {{ form_errors(form.Outil) }}
-
-</div>
-<div >
-   
-    {{ form_label(form.DureeDeVie ,"LifeTime") }}
-    {{ form_widget(form.DureeDeVie) }}
-    {{ form_errors(form.DureeDeVie) }}
-
-</div>
-
-
-<div  id="contoure">
-    
-    {{ form_label(form.PrixO ,"Price") }}
- {{ form_widget(form.PrixO) }}
-
-    {{ form_errors(form.PrixO) }}
-
-</div>
-<div  id="matierecss" > {{form_row(form.caracteristique)}}</div>
-
+		    	{{ form_widget(form.DureeDeVie) }}
+		    	{{ form_errors(form.DureeDeVie) }}
   
-   
-    
-        <div >
-        <a class="btn btn-primary btn-icon-split" href="{{ path('outils_index') }}" style= " right: 30px;">  <span class="icon text-white-50">
-    <i class="fas fa-check"></i>
-</span>
-<span class="text">Back to list</span></a>
-<button class="btn btn-primary btn-icon-split" > <a class="btn btn-primary btn-icon-split" href="{{ path('outils_index') }}" style= " right: 30px;">  <span class="icon text-white-50">
-<i class="fas fa-check"></i>
-</span>
-<span class="text">{{ button_label|default('Save') }}</span></a></button>
+            </div>
+        </div> 
+
+
+
+        <div class="item">
+          
+          <div class="name-item">
+         
+         
+
+		       {{ form_widget(form.PrixO) }}
+	           {{ form_errors(form.PrixO) }}
+
+	  
+		        {{form_widget(form.caracteristique)}}
+		        {{form_errors(form.caracteristique)}}
+          </div> 
+        
         </div>
 
 
+        
 
-{{ form_end(form) }}
-</div>
-  <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
-</body>
+
+         
+               
+
+
+
+            <div class="btn-block">
+                     <button type="submit" href="{{path('outils_index')}}">{{ button_label|default('SEND') }}</button>
+             </div>
+
+
+
+                 <div >
+                       <a class="btn btn-primary btn-icon-split" href="{{ path('outils_index') }}" >  <span class="icon text-white-50">
+                       <i class="fas fa-check"></i>
+                        </span> <span class="text">Back to list</span></a> 
+     
+                  </div>
+      
+       
+        
+        
+        
+        
+     
+      {{ form_rest(form) }} 
+      </form>
+     
+      {{ form_end(form) }}
+    </div>
+    
+
+
+  <audio id="mySound" src="{{asset('sound/error.mp3')}}"></audio>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/discover').then(result=>{
+            const hubUrl = result.headers.get('Link').match(/<([^>]+)>;\s+rel=(?:mercure|"[^"]*mercure[^"]*")/)[1];
+
+            let url = new URL(hubUrl);
+            url.searchParams.append('topic','notif');
+
+            const eventSource= new EventSource(url);
+            
+            eventSource.onmessage= (event) => {
+                var message =JSON.parse(event.data).message;
+                
+    var myAudio = document.getElementById("mySound");
+    myAudio.play();
+
+                $.toast({ 
+                    text : message, 
+                    showHideTransition : 'fade', 
+                    allowToastClose : true,      
+                    hideAfter : 8000,            
+                    stack : 5,                    
+                    textAlign : 'left',            
+                    position : 'bottom-left',    
+                    icon: 'info',
+                    loader: true,      
+                    loaderBg: '#A4DCF1'  
+                });
+            
+            }
+        })
+    });
+</script>
+
+
+
+
+
+
+
+
+  </body>
 </html>
